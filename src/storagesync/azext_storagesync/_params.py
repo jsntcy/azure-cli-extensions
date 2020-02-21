@@ -12,6 +12,9 @@ from azure.cli.core.commands.parameters import (
     resource_group_name_type,
     get_location_type
 )
+from azext_storagesync.action import (
+    PeeringAddRestoreFileSpec
+)
 
 
 def load_arguments(self, _):
@@ -109,6 +112,92 @@ def load_arguments(self, _):
         c.argument('storage_sync_service_name', id_part=None, help='Name of Storage Sync Service resource.')
         c.argument('sync_group_name', id_part=None, help='Name of Sync Group resource.')
 
+    with self.argument_context('storagesync cloud-endpoint pre-backup') as c:
+        c.argument('resource_group', resource_group_name_type)
+        c.argument('storage_sync_service_name', id_part=None, help='Name of Storage Sync Service resource.')
+        c.argument('sync_group_name', id_part=None, help='Name of Sync Group resource.')
+        c.argument('name', id_part=None, help='Name of Cloud Endpoint object.')
+        c.argument('azure_file_share', id_part=None, help='Azure File Share.')
+        c.argument('partition', id_part=None, help='Post Restore partition.')
+        c.argument('replica_group', id_part=None, help='Post Restore replica group.')
+        c.argument('request_id', id_part=None, help='Post Restore request id.')
+        c.argument('azure_file_share_uri', id_part=None, help='Post Restore Azure file share uri.')
+        c.argument('status', id_part=None, help='Post Restore Azure status.')
+        c.argument('source_azure_file_share_uri', id_part=None, help='Post Restore Azure source azure file share uri.')
+        c.argument('backup_metadata_property_bag', id_part=None, help='Pre Restore backup metadata property bag.')
+        c.argument('restore_file_spec', id_part=None, help='Post Restore restore file spec array.', action=PeeringAddRestoreFileSpec, nargs='+')
+        c.argument('pause_wait_for_sync_drain_time_period_in_seconds', id_part=None, help='Pre Restore pause wait for sync drain time period in seconds.')
+        c.argument('failed_file_list', id_part=None, help='Post Restore Azure failed file list.')
+        c.argument('directory_path', id_part=None, help='Relative path to a directory Azure File share for which change detection is to be performed.')
+        c.argument('change_detection_mode', arg_type=get_enum_type(['Default', 'Recursive']), id_part=None, help='Change Detection Mode. Applies to a directory specified in directoryPath parameter.')
+        c.argument('paths', id_part=None, help='Array of relative paths on the Azure File share to be included in the change detection. Can be files and directories.', nargs='+')
+
+    with self.argument_context('storagesync cloud-endpoint post-backup') as c:
+        c.argument('resource_group', resource_group_name_type)
+        c.argument('storage_sync_service_name', id_part=None, help='Name of Storage Sync Service resource.')
+        c.argument('sync_group_name', id_part=None, help='Name of Sync Group resource.')
+        c.argument('name', id_part=None, help='Name of Cloud Endpoint object.')
+        c.argument('azure_file_share', id_part=None, help='Azure File Share.')
+        c.argument('partition', id_part=None, help='Post Restore partition.')
+        c.argument('replica_group', id_part=None, help='Post Restore replica group.')
+        c.argument('request_id', id_part=None, help='Post Restore request id.')
+        c.argument('azure_file_share_uri', id_part=None, help='Post Restore Azure file share uri.')
+        c.argument('status', id_part=None, help='Post Restore Azure status.')
+        c.argument('source_azure_file_share_uri', id_part=None, help='Post Restore Azure source azure file share uri.')
+        c.argument('backup_metadata_property_bag', id_part=None, help='Pre Restore backup metadata property bag.')
+        c.argument('restore_file_spec', id_part=None, help='Post Restore restore file spec array.', action=PeeringAddRestoreFileSpec, nargs='+')
+        c.argument('pause_wait_for_sync_drain_time_period_in_seconds', id_part=None, help='Pre Restore pause wait for sync drain time period in seconds.')
+        c.argument('failed_file_list', id_part=None, help='Post Restore Azure failed file list.')
+        c.argument('directory_path', id_part=None, help='Relative path to a directory Azure File share for which change detection is to be performed.')
+        c.argument('change_detection_mode', arg_type=get_enum_type(['Default', 'Recursive']), id_part=None, help='Change Detection Mode. Applies to a directory specified in directoryPath parameter.')
+        c.argument('paths', id_part=None, help='Array of relative paths on the Azure File share to be included in the change detection. Can be files and directories.', nargs='+')
+
+    with self.argument_context('storagesync cloud-endpoint pre-restore') as c:
+        c.argument('resource_group', resource_group_name_type)
+        c.argument('storage_sync_service_name', id_part=None, help='Name of Storage Sync Service resource.')
+        c.argument('sync_group_name', id_part=None, help='Name of Sync Group resource.')
+        c.argument('name', id_part=None, help='Name of Cloud Endpoint object.')
+        c.argument('azure_file_share', id_part=None, help='Azure File Share.')
+        c.argument('partition', id_part=None, help='Post Restore partition.')
+        c.argument('replica_group', id_part=None, help='Post Restore replica group.')
+        c.argument('request_id', id_part=None, help='Post Restore request id.')
+        c.argument('azure_file_share_uri', id_part=None, help='Post Restore Azure file share uri.')
+        c.argument('status', id_part=None, help='Post Restore Azure status.')
+        c.argument('source_azure_file_share_uri', id_part=None, help='Post Restore Azure source azure file share uri.')
+        c.argument('backup_metadata_property_bag', id_part=None, help='Pre Restore backup metadata property bag.')
+        c.argument('restore_file_spec', id_part=None, help='Post Restore restore file spec array.', action=PeeringAddRestoreFileSpec, nargs='+')
+        c.argument('pause_wait_for_sync_drain_time_period_in_seconds', id_part=None, help='Pre Restore pause wait for sync drain time period in seconds.')
+        c.argument('failed_file_list', id_part=None, help='Post Restore Azure failed file list.')
+        c.argument('directory_path', id_part=None, help='Relative path to a directory Azure File share for which change detection is to be performed.')
+        c.argument('change_detection_mode', arg_type=get_enum_type(['Default', 'Recursive']), id_part=None, help='Change Detection Mode. Applies to a directory specified in directoryPath parameter.')
+        c.argument('paths', id_part=None, help='Array of relative paths on the Azure File share to be included in the change detection. Can be files and directories.', nargs='+')
+
+    with self.argument_context('storagesync cloud-endpoint restoreheartbeat') as c:
+        c.argument('resource_group', resource_group_name_type)
+        c.argument('storage_sync_service_name', id_part=None, help='Name of Storage Sync Service resource.')
+        c.argument('sync_group_name', id_part=None, help='Name of Sync Group resource.')
+        c.argument('name', id_part=None, help='Name of Cloud Endpoint object.')
+
+    with self.argument_context('storagesync cloud-endpoint post-restore') as c:
+        c.argument('resource_group', resource_group_name_type)
+        c.argument('storage_sync_service_name', id_part=None, help='Name of Storage Sync Service resource.')
+        c.argument('sync_group_name', id_part=None, help='Name of Sync Group resource.')
+        c.argument('name', id_part=None, help='Name of Cloud Endpoint object.')
+        c.argument('azure_file_share', id_part=None, help='Azure File Share.')
+        c.argument('partition', id_part=None, help='Post Restore partition.')
+        c.argument('replica_group', id_part=None, help='Post Restore replica group.')
+        c.argument('request_id', id_part=None, help='Post Restore request id.')
+        c.argument('azure_file_share_uri', id_part=None, help='Post Restore Azure file share uri.')
+        c.argument('status', id_part=None, help='Post Restore Azure status.')
+        c.argument('source_azure_file_share_uri', id_part=None, help='Post Restore Azure source azure file share uri.')
+        c.argument('backup_metadata_property_bag', id_part=None, help='Pre Restore backup metadata property bag.')
+        c.argument('restore_file_spec', id_part=None, help='Post Restore restore file spec array.', action=PeeringAddRestoreFileSpec, nargs='+')
+        c.argument('pause_wait_for_sync_drain_time_period_in_seconds', id_part=None, help='Pre Restore pause wait for sync drain time period in seconds.')
+        c.argument('failed_file_list', id_part=None, help='Post Restore Azure failed file list.')
+        c.argument('directory_path', id_part=None, help='Relative path to a directory Azure File share for which change detection is to be performed.')
+        c.argument('change_detection_mode', arg_type=get_enum_type(['Default', 'Recursive']), id_part=None, help='Change Detection Mode. Applies to a directory specified in directoryPath parameter.')
+        c.argument('paths', id_part=None, help='Array of relative paths on the Azure File share to be included in the change detection. Can be files and directories.', nargs='+')
+
     with self.argument_context('storagesync cloud-endpoint trigger-change-detection') as c:
         c.argument('resource_group', resource_group_name_type)
         c.argument('storage_sync_service_name', id_part=None, help='Name of Storage Sync Service resource.')
@@ -122,7 +211,7 @@ def load_arguments(self, _):
         c.argument('status', id_part=None, help='Post Restore Azure status.')
         c.argument('source_azure_file_share_uri', id_part=None, help='Post Restore Azure source azure file share uri.')
         c.argument('backup_metadata_property_bag', id_part=None, help='Pre Restore backup metadata property bag.')
-        c.argument('restore_file_spec', id_part=None, help='Post Restore restore file spec array.', nargs='+')
+        c.argument('restore_file_spec', id_part=None, help='Post Restore restore file spec array.', action=PeeringAddRestoreFileSpec, nargs='+')
         c.argument('pause_wait_for_sync_drain_time_period_in_seconds', id_part=None, help='Pre Restore pause wait for sync drain time period in seconds.')
         c.argument('failed_file_list', id_part=None, help='Post Restore Azure failed file list.')
         c.argument('directory_path', id_part=None, help='Relative path to a directory Azure File share for which change detection is to be performed.')
@@ -168,6 +257,14 @@ def load_arguments(self, _):
         c.argument('storage_sync_service_name', id_part=None, help='Name of Storage Sync Service resource.')
         c.argument('sync_group_name', id_part=None, help='Name of Sync Group resource.')
 
+    with self.argument_context('storagesync server-endpoint recall-action') as c:
+        c.argument('resource_group', resource_group_name_type)
+        c.argument('storage_sync_service_name', id_part=None, help='Name of Storage Sync Service resource.')
+        c.argument('sync_group_name', id_part=None, help='Name of Sync Group resource.')
+        c.argument('name', id_part=None, help='Name of Server Endpoint object.')
+        c.argument('pattern', id_part=None, help='Pattern of the files.')
+        c.argument('recall_path', id_part=None, help='Recall path.')
+
     with self.argument_context('storagesync registered-server create') as c:
         c.argument('resource_group', resource_group_name_type)
         c.argument('name', id_part=None, help='Name of Storage Sync Service resource.')
@@ -207,3 +304,8 @@ def load_arguments(self, _):
     with self.argument_context('storagesync registered-server list') as c:
         c.argument('resource_group', resource_group_name_type)
         c.argument('name', id_part=None, help='Name of Storage Sync Service resource.')
+
+    with self.argument_context('storagesync registered-server trigger-rollover') as c:
+        c.argument('resource_group', resource_group_name_type)
+        c.argument('name', id_part=None, help='Name of Storage Sync Service resource.')
+        c.argument('server_id', id_part=None, help='Server Id')

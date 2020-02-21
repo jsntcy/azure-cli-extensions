@@ -164,6 +164,162 @@ def list_storagesync_cloud_endpoint(cmd, client,
     return client.list_by_sync_group(resource_group_name=resource_group, storage_sync_service_name=storage_sync_service_name, sync_group_name=sync_group_name)
 
 
+def pre_backup_storagesync_cloud_endpoint(cmd, client,
+                                          resource_group,
+                                          storage_sync_service_name,
+                                          sync_group_name,
+                                          name,
+                                          azure_file_share=None,
+                                          partition=None,
+                                          replica_group=None,
+                                          request_id=None,
+                                          azure_file_share_uri=None,
+                                          status=None,
+                                          source_azure_file_share_uri=None,
+                                          backup_metadata_property_bag=None,
+                                          restore_file_spec=None,
+                                          pause_wait_for_sync_drain_time_period_in_seconds=None,
+                                          failed_file_list=None,
+                                          directory_path=None,
+                                          change_detection_mode=None,
+                                          paths=None):
+    body = {}
+    body['azure_file_share'] = azure_file_share  # str
+    body['partition'] = partition  # str
+    body['replica_group'] = replica_group  # str
+    body['request_id'] = request_id  # str
+    body['azure_file_share_uri'] = azure_file_share_uri  # str
+    body['status'] = status  # str
+    body['source_azure_file_share_uri'] = source_azure_file_share_uri  # str
+    body['backup_metadata_property_bag'] = backup_metadata_property_bag  # str
+    body['restore_file_spec'] = restore_file_spec
+    body['pause_wait_for_sync_drain_time_period_in_seconds'] = pause_wait_for_sync_drain_time_period_in_seconds  # number
+    body['failed_file_list'] = failed_file_list  # str
+    body['directory_path'] = directory_path  # str
+    body['change_detection_mode'] = change_detection_mode  # str
+    body['paths'] = None if paths is None else paths
+    return client.pre_backup(resource_group_name=resource_group, storage_sync_service_name=storage_sync_service_name, sync_group_name=sync_group_name, cloud_endpoint_name=name, parameters=body)
+
+
+def post_backup_storagesync_cloud_endpoint(cmd, client,
+                                           resource_group,
+                                           storage_sync_service_name,
+                                           sync_group_name,
+                                           name,
+                                           azure_file_share=None,
+                                           partition=None,
+                                           replica_group=None,
+                                           request_id=None,
+                                           azure_file_share_uri=None,
+                                           status=None,
+                                           source_azure_file_share_uri=None,
+                                           backup_metadata_property_bag=None,
+                                           restore_file_spec=None,
+                                           pause_wait_for_sync_drain_time_period_in_seconds=None,
+                                           failed_file_list=None,
+                                           directory_path=None,
+                                           change_detection_mode=None,
+                                           paths=None):
+    body = {}
+    body['azure_file_share'] = azure_file_share  # str
+    body['partition'] = partition  # str
+    body['replica_group'] = replica_group  # str
+    body['request_id'] = request_id  # str
+    body['azure_file_share_uri'] = azure_file_share_uri  # str
+    body['status'] = status  # str
+    body['source_azure_file_share_uri'] = source_azure_file_share_uri  # str
+    body['backup_metadata_property_bag'] = backup_metadata_property_bag  # str
+    body['restore_file_spec'] = restore_file_spec
+    body['pause_wait_for_sync_drain_time_period_in_seconds'] = pause_wait_for_sync_drain_time_period_in_seconds  # number
+    body['failed_file_list'] = failed_file_list  # str
+    body['directory_path'] = directory_path  # str
+    body['change_detection_mode'] = change_detection_mode  # str
+    body['paths'] = None if paths is None else paths
+    return client.post_backup(resource_group_name=resource_group, storage_sync_service_name=storage_sync_service_name, sync_group_name=sync_group_name, cloud_endpoint_name=name, parameters=body)
+
+
+def pre_restore_storagesync_cloud_endpoint(cmd, client,
+                                           resource_group,
+                                           storage_sync_service_name,
+                                           sync_group_name,
+                                           name,
+                                           azure_file_share=None,
+                                           partition=None,
+                                           replica_group=None,
+                                           request_id=None,
+                                           azure_file_share_uri=None,
+                                           status=None,
+                                           source_azure_file_share_uri=None,
+                                           backup_metadata_property_bag=None,
+                                           restore_file_spec=None,
+                                           pause_wait_for_sync_drain_time_period_in_seconds=None,
+                                           failed_file_list=None,
+                                           directory_path=None,
+                                           change_detection_mode=None,
+                                           paths=None):
+    body = {}
+    body['azure_file_share'] = azure_file_share  # str
+    body['partition'] = partition  # str
+    body['replica_group'] = replica_group  # str
+    body['request_id'] = request_id  # str
+    body['azure_file_share_uri'] = azure_file_share_uri  # str
+    body['status'] = status  # str
+    body['source_azure_file_share_uri'] = source_azure_file_share_uri  # str
+    body['backup_metadata_property_bag'] = backup_metadata_property_bag  # str
+    body['restore_file_spec'] = restore_file_spec
+    body['pause_wait_for_sync_drain_time_period_in_seconds'] = pause_wait_for_sync_drain_time_period_in_seconds  # number
+    body['failed_file_list'] = failed_file_list  # str
+    body['directory_path'] = directory_path  # str
+    body['change_detection_mode'] = change_detection_mode  # str
+    body['paths'] = None if paths is None else paths
+    return client.pre_restore(resource_group_name=resource_group, storage_sync_service_name=storage_sync_service_name, sync_group_name=sync_group_name, cloud_endpoint_name=name, parameters=body)
+
+
+def restoreheartbeat_storagesync_cloud_endpoint(cmd, client,
+                                                resource_group,
+                                                storage_sync_service_name,
+                                                sync_group_name,
+                                                name):
+    return client.restoreheartbeat(resource_group_name=resource_group, storage_sync_service_name=storage_sync_service_name, sync_group_name=sync_group_name, cloud_endpoint_name=name)
+
+
+def post_restore_storagesync_cloud_endpoint(cmd, client,
+                                            resource_group,
+                                            storage_sync_service_name,
+                                            sync_group_name,
+                                            name,
+                                            azure_file_share=None,
+                                            partition=None,
+                                            replica_group=None,
+                                            request_id=None,
+                                            azure_file_share_uri=None,
+                                            status=None,
+                                            source_azure_file_share_uri=None,
+                                            backup_metadata_property_bag=None,
+                                            restore_file_spec=None,
+                                            pause_wait_for_sync_drain_time_period_in_seconds=None,
+                                            failed_file_list=None,
+                                            directory_path=None,
+                                            change_detection_mode=None,
+                                            paths=None):
+    body = {}
+    body['azure_file_share'] = azure_file_share  # str
+    body['partition'] = partition  # str
+    body['replica_group'] = replica_group  # str
+    body['request_id'] = request_id  # str
+    body['azure_file_share_uri'] = azure_file_share_uri  # str
+    body['status'] = status  # str
+    body['source_azure_file_share_uri'] = source_azure_file_share_uri  # str
+    body['backup_metadata_property_bag'] = backup_metadata_property_bag  # str
+    body['restore_file_spec'] = restore_file_spec
+    body['pause_wait_for_sync_drain_time_period_in_seconds'] = pause_wait_for_sync_drain_time_period_in_seconds  # number
+    body['failed_file_list'] = failed_file_list  # str
+    body['directory_path'] = directory_path  # str
+    body['change_detection_mode'] = change_detection_mode  # str
+    body['paths'] = None if paths is None else paths
+    return client.post_restore(resource_group_name=resource_group, storage_sync_service_name=storage_sync_service_name, sync_group_name=sync_group_name, cloud_endpoint_name=name, parameters=body)
+
+
 def trigger_change_detection_storagesync_cloud_endpoint(cmd, client,
                                                         resource_group,
                                                         storage_sync_service_name,
@@ -267,6 +423,19 @@ def list_storagesync_server_endpoint(cmd, client,
     return client.list_by_sync_group(resource_group_name=resource_group, storage_sync_service_name=storage_sync_service_name, sync_group_name=sync_group_name)
 
 
+def recall_action_storagesync_server_endpoint(cmd, client,
+                                              resource_group,
+                                              storage_sync_service_name,
+                                              sync_group_name,
+                                              name,
+                                              pattern=None,
+                                              recall_path=None):
+    body = {}
+    body['pattern'] = pattern  # str
+    body['recall_path'] = recall_path  # str
+    return client.recall_action(resource_group_name=resource_group, storage_sync_service_name=storage_sync_service_name, sync_group_name=sync_group_name, server_endpoint_name=name, parameters=body)
+
+
 def create_storagesync_registered_server(cmd, client,
                                          resource_group,
                                          name,
@@ -341,3 +510,11 @@ def list_storagesync_registered_server(cmd, client,
                                        resource_group,
                                        name):
     return client.list_by_storage_sync_service(resource_group_name=resource_group, storage_sync_service_name=name)
+
+
+def trigger_rollover_storagesync_registered_server(cmd, client,
+                                                   resource_group,
+                                                   name,
+                                                   server_id):
+    body = {}
+    return client.trigger_rollover(resource_group_name=resource_group, storage_sync_service_name=name, server_id=server_id, parameters=body)

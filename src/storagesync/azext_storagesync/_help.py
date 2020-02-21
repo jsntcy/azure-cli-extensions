@@ -9,7 +9,7 @@
 from knack.help_files import helps  # pylint: disable=unused-import
 
 
-helps['storagesync'] = """
+helps['-'] = """
     type: group
     short-summary: Commands to manage .
 """

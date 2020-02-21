@@ -45,6 +45,11 @@ def load_command_table(self, _):
         g.custom_command('delete', 'delete_storagesync_cloud_endpoint')
         g.custom_show_command('show', 'get_storagesync_cloud_endpoint')
         g.custom_command('list', 'list_storagesync_cloud_endpoint')
+        g.custom_command('pre-backup', 'pre_backup_storagesync_cloud_endpoint')
+        g.custom_command('post-backup', 'post_backup_storagesync_cloud_endpoint')
+        g.custom_command('pre-restore', 'pre_restore_storagesync_cloud_endpoint')
+        g.custom_command('restoreheartbeat', 'restoreheartbeat_storagesync_cloud_endpoint')
+        g.custom_command('post-restore', 'post_restore_storagesync_cloud_endpoint')
         g.custom_command('trigger-change-detection', 'trigger_change_detection_storagesync_cloud_endpoint')
 
     from ._client_factory import cf_server_endpoints
@@ -57,6 +62,7 @@ def load_command_table(self, _):
         g.custom_command('delete', 'delete_storagesync_server_endpoint')
         g.custom_show_command('show', 'get_storagesync_server_endpoint')
         g.custom_command('list', 'list_storagesync_server_endpoint')
+        g.custom_command('recall-action', 'recall_action_storagesync_server_endpoint')
 
     from ._client_factory import cf_registered_servers
     storagesync_registered_servers = CliCommandType(
@@ -68,3 +74,4 @@ def load_command_table(self, _):
         g.custom_command('delete', 'delete_storagesync_registered_server')
         g.custom_show_command('show', 'get_storagesync_registered_server')
         g.custom_command('list', 'list_storagesync_registered_server')
+        g.custom_command('trigger-rollover', 'trigger_rollover_storagesync_registered_server')
