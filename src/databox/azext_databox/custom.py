@@ -7,15 +7,12 @@
 # pylint: disable=too-many-lines
 # pylint: disable=too-many-locals
 # pylint: disable=unused-argument
+# pylint: disable=too-many-branches
 
 
-def list_databox_operation(cmd, client):
-    return client.list()
-
-
-def create_databox_job(cmd, client,
-                       resource_group,
-                       name,
+def create_databox_job(client,
+                       resource_group_name,
+                       job_name,
                        location,
                        sku_name,
                        details_contact_details_contact_name,
@@ -61,12 +58,12 @@ def create_databox_job(cmd, client,
     body.setdefault('details', {}).setdefault('shipping_address', {})['company_name'] = details_shipping_address_company_name  # str
     body.setdefault('details', {}).setdefault('shipping_address', {})['address_type'] = details_shipping_address_address_type  # str
     body['destination_account_details'] = destination_account_details
-    return client.create(resource_group_name=resource_group, job_name=name, job_resource=body)
+    return client.create(resource_group_name=resource_group_name, job_name=job_name, job_resource=body)
 
 
-def update_databox_job(cmd, client,
-                       resource_group,
-                       name,
+def update_databox_job(client,
+                       resource_group_name,
+                       job_name,
                        location=None,
                        tags=None,
                        sku_name=None,
@@ -134,31 +131,31 @@ def update_databox_job(cmd, client,
         body.setdefault('details', {}).setdefault('shipping_address', {})['address_type'] = details_shipping_address_address_type  # str
     if destination_account_details is not None:
         body['destination_account_details'] = destination_account_details
-    return client.create(resource_group_name=resource_group, job_name=name, job_resource=body)
+    return client.create(resource_group_name=resource_group_name, job_name=job_name, job_resource=body)
 
 
-def delete_databox_job(cmd, client,
-                       resource_group,
-                       name):
-    return client.delete(resource_group_name=resource_group, job_name=name)
+def delete_databox_job(client,
+                       resource_group_name,
+                       job_name):
+    return client.delete(resource_group_name=resource_group_name, job_name=job_name)
 
 
-def get_databox_job(cmd, client,
-                    resource_group,
-                    name):
-    return client.get(resource_group_name=resource_group, job_name=name)
+def get_databox_job(client,
+                    resource_group_name,
+                    job_name):
+    return client.get(resource_group_name=resource_group_name, job_name=job_name)
 
 
-def list_databox_job(cmd, client,
+def list_databox_job(client,
                      resource_group=None):
     if resource_group is not None:
         return client.list_by_resource_group(resource_group_name=resource_group)
     return client.list()
 
 
-def book_shipment_pick_up_databox_job(cmd, client,
-                                      resource_group,
-                                      name,
+def book_shipment_pick_up_databox_job(client,
+                                      resource_group_name,
+                                      job_name,
                                       start_time,
                                       end_time,
                                       shipment_location,
@@ -168,12 +165,12 @@ def book_shipment_pick_up_databox_job(cmd, client,
     body['end_time'] = end_time  # datetime
     body['shipment_location'] = shipment_location  # str
     body['reason'] = reason  # str
-    return client.book_shipment_pick_up(resource_group_name=resource_group, job_name=name, shipment_pick_up_request=body)
+    return client.book_shipment_pick_up(resource_group_name=resource_group_name, job_name=job_name, shipment_pick_up_request=body)
 
 
-def cancel_databox_job(cmd, client,
-                       resource_group,
-                       name,
+def cancel_databox_job(client,
+                       resource_group_name,
+                       job_name,
                        start_time,
                        end_time,
                        shipment_location,
@@ -183,16 +180,16 @@ def cancel_databox_job(cmd, client,
     body['end_time'] = end_time  # datetime
     body['shipment_location'] = shipment_location  # str
     body['reason'] = reason  # str
-    return client.cancel(resource_group_name=resource_group, job_name=name, cancellation_reason=body)
+    return client.cancel(resource_group_name=resource_group_name, job_name=job_name, cancellation_reason=body)
 
 
-def list_credentials_databox_job(cmd, client,
-                                 resource_group,
-                                 name):
-    return client.list_credentials(resource_group_name=resource_group, job_name=name)
+def list_credentials_databox_job(client,
+                                 resource_group_name,
+                                 job_name):
+    return client.list_credentials(resource_group_name=resource_group_name, job_name=job_name)
 
 
-def list_available_skus_databox_service(cmd, client,
+def list_available_skus_databox_service(client,
                                         location,
                                         transfer_type,
                                         country,
@@ -206,8 +203,8 @@ def list_available_skus_databox_service(cmd, client,
     return client.list_available_skus(location=location, available_sku_request=body)
 
 
-def list_available_skus_by_resource_group_databox_service(cmd, client,
-                                                          resource_group,
+def list_available_skus_by_resource_group_databox_service(client,
+                                                          resource_group_name,
                                                           location,
                                                           transfer_type,
                                                           country,
@@ -218,10 +215,10 @@ def list_available_skus_by_resource_group_databox_service(cmd, client,
     body['country'] = country  # str
     body['sku_names'] = None if sku_names is None else sku_names
     body['device_type'] = device_type  # str
-    return client.list_available_skus_by_resource_group(resource_group_name=resource_group, location=location, available_sku_request=body)
+    return client.list_available_skus_by_resource_group(resource_group_name=resource_group_name, location=location, available_sku_request=body)
 
 
-def validate_address_method_databox_service(cmd, client,
+def validate_address_method_databox_service(client,
                                             location,
                                             transfer_type,
                                             country,
@@ -235,8 +232,8 @@ def validate_address_method_databox_service(cmd, client,
     return client.validate_address_method(location=location, validate_address=body)
 
 
-def validate_inputs_by_resource_group_databox_service(cmd, client,
-                                                      resource_group,
+def validate_inputs_by_resource_group_databox_service(client,
+                                                      resource_group_name,
                                                       location,
                                                       transfer_type,
                                                       country,
@@ -247,10 +244,10 @@ def validate_inputs_by_resource_group_databox_service(cmd, client,
     body['country'] = country  # str
     body['sku_names'] = None if sku_names is None else sku_names
     body['device_type'] = device_type  # str
-    return client.validate_inputs_by_resource_group(resource_group_name=resource_group, location=location, validation_request=body)
+    return client.validate_inputs_by_resource_group(resource_group_name=resource_group_name, location=location, validation_request=body)
 
 
-def validate_inputs_databox_service(cmd, client,
+def validate_inputs_databox_service(client,
                                     location,
                                     transfer_type,
                                     country,
@@ -264,7 +261,7 @@ def validate_inputs_databox_service(cmd, client,
     return client.validate_inputs(location=location, validation_request=body)
 
 
-def region_configuration_databox_service(cmd, client,
+def region_configuration_databox_service(client,
                                          location,
                                          transfer_type,
                                          country,

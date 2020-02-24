@@ -10,10 +10,6 @@ def cf_databox(cli_ctx, *_):
     return get_mgmt_service_client(cli_ctx, DataBoxManagementClient)
 
 
-def cf_operations(cli_ctx, *_):
-    return cf_databox(cli_ctx).operations
-
-
 def cf_jobs(cli_ctx, *_):
     return cf_databox(cli_ctx).jobs
 
