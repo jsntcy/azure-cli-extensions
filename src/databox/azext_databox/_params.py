@@ -12,14 +12,19 @@ from azure.cli.core.commands.parameters import (
     resource_group_name_type,
     get_location_type
 )
+from azure.cli.core.commands.validators import get_default_location_from_resource_group
+from knack.arguments import CLIArgumentType
 
 
 def load_arguments(self, _):
 
+    job_name_type = CLIArgumentType(
+        help='The name of the job Resource within the specified resource group. job names must be between 3 and 24 '
+             'characters in length and use any alphanumeric and underscore only')
+
     with self.argument_context('databox job create') as c:
-        c.argument('resource_group_name', resource_group_name_type)
-        c.argument('name', help='The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only')
-        c.argument('location', arg_type=get_location_type(self.cli_ctx))
+        c.argument('job_name', job_name_type)
+        c.argument('location', arg_type=get_location_type(self.cli_ctx), default=None, validator=get_default_location_from_resource_group)
         c.argument('tags', tags_type)
         c.argument('sku_name', arg_type=get_enum_type(['DataBox', 'DataBoxDisk', 'DataBoxHeavy']), help='The sku name.')
         c.argument('sku_display_name', help='The display name of the sku.')
@@ -43,8 +48,7 @@ def load_arguments(self, _):
         c.argument('destination_account_details', help='Destination account details.', nargs='+')
 
     with self.argument_context('databox job update') as c:
-        c.argument('resource_group', resource_group_name_type)
-        c.argument('name', help='The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only')
+        c.argument('job_name', job_name_type)
         c.argument('location', arg_type=get_location_type(self.cli_ctx))
         c.argument('tags', tags_type)
         c.argument('sku_name', arg_type=get_enum_type(['DataBox', 'DataBoxDisk', 'DataBoxHeavy']), help='The sku name.')
@@ -69,32 +73,23 @@ def load_arguments(self, _):
         c.argument('destination_account_details', help='Destination account details.', nargs='+')
 
     with self.argument_context('databox job delete') as c:
-        c.argument('resource_group', resource_group_name_type)
-        c.argument('name', help='The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only')
+        c.argument('job_name', job_name_type)
 
     with self.argument_context('databox job show') as c:
-        c.argument('resource_group', resource_group_name_type)
-        c.argument('job_name', help='The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only')
-
-    with self.argument_context('databox job list') as c:
-        c.argument('resource_group', resource_group_name_type)
+        c.argument('job_name', job_name_type)
 
     with self.argument_context('databox job book-shipment-pick-up') as c:
-        c.argument('resource_group', resource_group_name_type)
-        c.argument('name', help='The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only')
+        c.argument('job_name', job_name_type)
         c.argument('start_time', help='Minimum date after which the pick up should commence, this must be in local time of pick up area.')
         c.argument('end_time', help='Maximum date before which the pick up should commence, this must be in local time of pick up area.')
         c.argument('shipment_location', help='Shipment Location in the pickup place. Eg.front desk')
         c.argument('reason', help='Reason for cancellation.')
 
     with self.argument_context('databox job cancel') as c:
-        c.argument('resource_group', resource_group_name_type)
-        c.argument('name', help='The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only')
-        c.argument('start_time', help='Minimum date after which the pick up should commence, this must be in local time of pick up area.')
+        c.argument('job_name', job_name_type)
         c.argument('end_time', help='Maximum date before which the pick up should commence, this must be in local time of pick up area.')
         c.argument('shipment_location', help='Shipment Location in the pickup place. Eg.front desk')
         c.argument('reason', help='Reason for cancellation.')
 
     with self.argument_context('databox job list-credentials') as c:
-        c.argument('resource_group', resource_group_name_type)
-        c.argument('name', help='The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only')
+        c.argument('job_name', job_name_type)

@@ -147,9 +147,9 @@ def get_databox_job(client,
 
 
 def list_databox_job(client,
-                     resource_group=None):
-    if resource_group is not None:
-        return client.list_by_resource_group(resource_group_name=resource_group)
+                     resource_group_name=None):
+    if resource_group_name is not None:
+        return client.list_by_resource_group(resource_group_name=resource_group_name)
     return client.list()
 
 
