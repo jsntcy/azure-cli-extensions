@@ -7,36 +7,14 @@
 # pylint: disable=too-many-lines
 # pylint: disable=too-many-locals
 # pylint: disable=unused-argument
-import uuid
-
-import pythoncom
-import win32com.client
+from __future__ import absolute_import
 
 import abc
+import sys
 
-
-class IEcsManagement(object):
-    __metaclass__ = abc.ABCMeta
-
-    @abc.abstractmethod
-    def register_sync_server(self, service_uri, subscription_id, storage_sync_service_name, resource_group_name,
-                             certificate_provider_name, certificate_hash_algorithm, certificate_key_length,
-                             monitoring_data_path):
-        return
-
-
-class EcsManagementInteropClient(IEcsManagement):
-    _reg_clsid_ = "{41E24E95-D45A-11D2-852C-204C4F4F5020}"
-
-    def __init__(self):
-        clsid = pythoncom.MakeIID('{3EC1199D-20EB-40C0-8294-EB684E89AB2B}')
-        iid = pythoncom.MakeIID('{F29EAB44-2C63-4ACE-8C05-67C2203CBED2}')
-        mgmt_object = pythoncom.CoCreateInstance(clsid, None, pythoncom.CLSCTX_LOCAL_SERVER, iid)
-
-    def register_sync_server(self, service_uri, subscription_id, storage_sync_service_name, resource_group_name,
-                             certificate_provider_name, certificate_hash_algorithm, certificate_key_length,
-                             monitoring_data_path):
-        return
+# Condition to match the setup.py
+if sys.platform == "win32":
+    from ._excttsvc import register_sync_server
 
 
 def create_storagesync_storage_sync_service(client,
@@ -208,6 +186,12 @@ def create_storagesync_registered_server(client,
                                          resource_group_name,
                                          storage_sync_service_name):
     body = {}
+    serviceUri = "https://management.azure.com"
+    subscription_id = "0b1f6471-1bf0-4dda-aec3-cb9272f09590"
+    certificate_provider_name = "Microsoft Enhanced RSA and AES Cryptographic Provider";
+    certificate_hash_algorithm = "1.2.840.113549.1.1.13";
+    certificate_key_length = 2048;
+    register_sync_server(serviceUri, subscription_id, storage_sync_service_name, resource_group_name, certificate_provider_name, certificate_hash_algorithm, certificate_key_length, monitoringDataPath);
     xl = win32com.client.Dispatch("Excel.Application")
     mgmt_object = pythoncom.CoCreateInstance(uuid.UUID('{3EC1199D-20EB-40C0-8294-EB684E89AB2B}'), None, pythoncom.CLSCTX_LOCAL_SERVER,
                                uuid.UUID('{F29EAB44-2C63-4ACE-8C05-67C2203CBED2}'))

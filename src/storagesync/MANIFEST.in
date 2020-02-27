@@ -1,0 +1,3 @@
+include azext_storagesync/EcsTtSvc.h
+include azext_storagesync/EcsTtSvc_i.c
+include azext_storagesync/_excttsvc.pyx

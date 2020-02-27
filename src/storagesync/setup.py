@@ -5,9 +5,11 @@
 # Licensed under the MIT License. See License.txt in the project root for license information.
 # --------------------------------------------------------------------------------------------
 
+import os
+import sys
 
 from codecs import open
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Extension
 try:
     from azure_bdist_wheel import cmdclass
 except ImportError:
@@ -35,9 +37,29 @@ CLASSIFIERS = [
 ]
 
 # TODO: Add any additional SDK dependencies here
-DEPENDENCIES = [
-    'pywin32==227'
-]
+DEPENDENCIES = []
+
+if sys.platform == "win32":
+    EXTENSIONS = [
+        Extension(
+            name="azext_storagesync._excttsvc",
+            sources=[
+                "azext_storagesync/_excttsvc.pyx",
+                "azext_storagesync/EcsTtSvc_i.c"
+            ],
+            language="c++",
+            libraries=["ole32", "oleaut32"],
+            define_macros=[
+                ('_WIN32_WINNT', '_WIN32_WINNT_WIN8'),
+                ('UNICODE', '1'),
+            ],
+            # For debugging
+            #extra_compile_args=["-Od", "-Zi"],
+            #extra_link_args=["-debug:full", "-incremental", "-ltcg:off"],
+        ),
+    ]
+else:
+    EXTENSIONS = []
 
 with open('README.rst', 'r', encoding='utf-8') as f:
     README = f.read()
@@ -48,7 +70,7 @@ setup(
     name='storagesync',
     version=VERSION,
     description='Microsoft Azure Command-Line Tools MicrosoftStorageSync Extension',
-   # TODO: Update author and email, if applicable
+    # TODO: Update author and email, if applicable
     author='Microsoft Corporation',
     author_email='azpycli@microsoft.com',
     # TODO: consider pointing directly to your source code instead of the generic repo
@@ -58,5 +80,6 @@ setup(
     classifiers=CLASSIFIERS,
     packages=find_packages(),
     install_requires=DEPENDENCIES,
+    ext_modules=EXTENSIONS,
     package_data={'azext_storagesync': ['azext_metadata.json']},
 )
