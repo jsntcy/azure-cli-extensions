@@ -18,9 +18,8 @@ def load_command_table(self, _):
         client_factory=cf_jobs)
     with self.command_group('databox job', databox_jobs, client_factory=cf_jobs) as g:
         g.custom_command('create', 'create_databox_job')
-        g.custom_command('update', 'update_databox_job')
-        g.custom_command('delete', 'delete_databox_job')
+        g.custom_command('delete', 'delete_databox_job', confirmation=True)
         g.custom_show_command('show', 'get_databox_job')
         g.custom_command('list', 'list_databox_job')
-        g.custom_command('cancel', 'cancel_databox_job')
+        g.custom_command('cancel', 'cancel_databox_job', confirmation=True)
         g.custom_command('list-credentials', 'list_credentials_databox_job')
