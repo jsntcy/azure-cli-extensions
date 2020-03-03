@@ -75,12 +75,12 @@ def update_databox_job(client,
                        street_address3=None,
                        state_or_province=None,
                        company_name=None):
-    body = {}
     job_resource = get_databox_job(client, resource_group_name, job_name)
     job_details = job_resource.details
     contact_details = job_details.contact_details
     shipping_address = job_details.shipping_address
 
+    body = {}
     body.setdefault('details', {}).setdefault('contact_details', {})['contact_name'] = contact_details.contact_name if contact_name is None else contact_name  # str
     body.setdefault('details', {}).setdefault('contact_details', {})['phone'] = contact_details.phone if phone is None else phone  # str
     body.setdefault('details', {}).setdefault('contact_details', {})['mobile'] = contact_details.mobile if mobile is None else mobile  # str

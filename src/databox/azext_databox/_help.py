@@ -10,8 +10,8 @@ from knack.help_files import helps  # pylint: disable=unused-import
 
 
 helps['databox job'] = """
-type: group
-short-summary: Commands to manage databox job.
+    type: group
+    short-summary: Commands to manage databox job.
 """
 
 helps['databox job create'] = """
@@ -23,9 +23,8 @@ helps['databox job create'] = """
                az databox job create --resource-group "SdkRg4981" --job-name "SdkJob3971" --location \\
                "westus" --sku-name "DataBox" --contact-name "Public SDK Test" \\
                --phone "1234567890" --email-list "testing@microsoft.com" \\
-               --street-address1 "16 TOWNSEND ST" --street-address2 "Unit 1" --city \\
-               "San Francisco" --state-or-province "CA" --country "US" --postal-code "94107" \\
-               --company-name "Microsoft" \\
+               --street-address1 "16 TOWNSEND ST" --street-address2 "Unit 1" --city "San Francisco"  \\
+               --state-or-province "CA" --country "US" --postal-code "94107" --company-name "Microsoft" \\
                --storage-account-id /subscriptions/sub/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/sa \\
                --staging-storage-account-id /subscriptions/sub/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/sa \\
                --resource-group-id /subscriptions/sub/resourceGroups/rg
@@ -41,7 +40,7 @@ helps['databox job update'] = """
                --contact-name "Update Job" --phone "1234567890" \\
                --email-list "testing@microsoft.com" \\
                --street-address1 "16 TOWNSEND ST" \\
-               "San Francisco" --state-or-province "CA" \\
+               --city "San Francisco" --state-or-province "CA" \\
                --country "US" --postal-code "94107" \\
                --company-name "Microsoft" \\
 """

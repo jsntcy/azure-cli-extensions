@@ -5,6 +5,8 @@
 
 from azure.cli.core import AzCommandsLoader
 
+import azext_databox._help  # pylint: disable=unused-import
+
 
 class DataBoxCommandsLoader(AzCommandsLoader):
 

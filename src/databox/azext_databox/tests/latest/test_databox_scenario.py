@@ -4,9 +4,7 @@
 # --------------------------------------------------------------------------------------------
 
 import os
-import unittest
 
-from azure_devtools.scenario_tests import AllowLargeResponse
 from azure.cli.testsdk import (ScenarioTest, ResourceGroupPreparer, StorageAccountPreparer, JMESPathCheck)
 
 TEST_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), '..'))
@@ -89,6 +87,7 @@ class DataBoxScenarioTest(ScenarioTest):
                  '--job-name {job_name} ',
                  expect_failure=True)
 
+        # DataBox service will create a lock 'DATABOX_SERVICE' on the storage account under the resource group when creating a job. In order to clean up the resource group, we need delete the lock first.
         self.cmd('lock delete '
                  '--name DATABOX_SERVICE '
                  '-g {rg} '
