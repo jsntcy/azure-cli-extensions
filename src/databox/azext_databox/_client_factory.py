@@ -6,7 +6,7 @@
 
 def cf_databox(cli_ctx, *_):
     from azure.cli.core.commands.client_factory import get_mgmt_service_client
-    from .vendored_sdks.databox import DataBoxManagementClient
+    from azext_databox.vendored_sdks.databox import DataBoxManagementClient
     return get_mgmt_service_client(cli_ctx, DataBoxManagementClient)
 
 
