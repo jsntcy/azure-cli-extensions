@@ -226,16 +226,6 @@ helps['storagesync registered-server'] = """
     short-summary: Manage registered server.
 """
 
-helps['storagesync registered-server create'] = """
-    type: command
-    short-summary: Register an on-premises server to a storage sync service which creates a trust relationship.
-    examples:
-      - name: Register an on-premises server to storage sync service "SampleStorageSyncService".
-        text: |-
-               az storagesync registered-server create --resource-group "SampleResourceGroup" --storage-sync-service-name \\
-               "SampleStorageSyncService"
-"""
-
 helps['storagesync registered-server delete'] = """
     type: command
     short-summary: Unregister an on-premises server from it's storage sync service.
@@ -265,15 +255,4 @@ helps['storagesync registered-server list'] = """
         text: |-
                az storagesync registered-server list --resource-group "SampleResourceGroup" --storage-sync-service-name \\
                "SampleStorageSyncService"
-"""
-
-helps['storagesync registered-server rollover-certificate'] = """
-    type: command
-    short-summary: Rollover the local server certificate used to describe the server identity to the storage sync service.
-    long-summary: Rollover the local server certificate and inform the corresponding storage sync service of the server's new identity, in a secure way.
-    examples:
-      - name: Rollover local server certificate and inform storage sync service "SampleStorageSyncService".
-        text: |-
-               az storagesync registered-server rollover-certificate--resource-group \\
-               "SampleResourceGroup" --storage-sync-service-name "SampleStorageSyncService"
 """
